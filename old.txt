@@ -1,0 +1,194 @@
+  #主條目-編號
+  OUTPUT["主條目"]["編號"]="";
+  check=True;
+  for i in range(1,len(mdata)):
+    if check == False:
+      break;
+    if my.is_string_like(mdata[i],"│號│縣　市│鄉鎮市區│"):
+      for j in range((i+2),len(mdata)):        
+        if my.is_string_like(mdata[j],"│  │"):
+          check=False;
+          break;
+        else:
+          LD = mdata[j][0:4];          
+          LD = my.trim(my.get_between(LD,"│","│"));
+          OUTPUT["主條目"]["編號"] += LD;          
+      break; 
+  OUTPUT["主條目"]["編號"]=my.trim(OUTPUT["主條目"]["編號"]);
+  #主條目-土地坐落-縣市
+  OUTPUT["主條目"]["土地坐落"]["縣市"]="";
+  check=True;
+  for i in range(1,len(mdata)):
+    if check == False:
+      break;
+    if my.is_string_like(mdata[i],"│號│縣　市│鄉鎮市區│"):      
+      for j in range((i+2),len(mdata)):        
+        #print(mdata[j]);
+        if my.is_string_like(mdata[j],"─"):
+          check=False;
+          break;
+        else:
+          LD = mdata[j][3:8];                    
+          LD = my.trim(my.get_between(LD,"│","│"));
+          OUTPUT["主條目"]["土地坐落"]["縣市"] += LD;          
+      break; 
+  OUTPUT["主條目"]["土地坐落"]["縣市"]=my.trim(OUTPUT["主條目"]["土地坐落"]["縣市"]);
+  #主條目-土地坐落-鄉鎮市區
+  OUTPUT["主條目"]["土地坐落"]["鄉鎮市區"]="";
+  check=True;
+  for i in range(1,len(mdata)):
+    if check == False:
+      break;
+    if my.is_string_like(mdata[i],"│號│縣　市│鄉鎮市區│"):      
+      for j in range((i+2),len(mdata)):        
+        #print(mdata[j]);
+        if my.is_string_like(mdata[j],"─"):
+          check=False;
+          break;
+        else:
+          LD = mdata[j][7:14];                    
+          LD = my.trim(my.get_between(LD,"│","│"));
+          OUTPUT["主條目"]["土地坐落"]["鄉鎮市區"] += LD;          
+      break; 
+  OUTPUT["主條目"]["土地坐落"]["鄉鎮市區"]=my.trim(OUTPUT["主條目"]["土地坐落"]["鄉鎮市區"]);
+  #主條目-土地坐落-段
+  OUTPUT["主條目"]["土地坐落"]["段"]="";
+  check=True;
+  for i in range(1,len(mdata)):
+    if check == False:
+      break;
+    if my.is_string_like(mdata[i],"│號│縣　市│鄉鎮市區│"):      
+      for j in range((i+2),len(mdata)):        
+        #print(mdata[j]);
+        if my.is_string_like(mdata[j],"─"):
+          check=False;
+          break;
+        else:
+          LD = mdata[j][13:19];  
+          #print(LD)
+          #my.exit();                  
+          LD = my.trim(my.get_between(LD,"│","│"));
+          OUTPUT["主條目"]["土地坐落"]["段"] += LD;          
+      break; 
+  OUTPUT["主條目"]["土地坐落"]["段"]=my.trim(OUTPUT["主條目"]["土地坐落"]["段"]);
+  #主條目-土地坐落-小段
+  OUTPUT["主條目"]["土地坐落"]["小段"]="";
+  check=True;
+  for i in range(1,len(mdata)):
+    if check == False:
+      break;
+    if my.is_string_like(mdata[i],"│號│縣　市│鄉鎮市區│"):      
+      for j in range((i+2),len(mdata)):        
+        #print(mdata[j]);
+        if my.is_string_like(mdata[j],"─"):
+          check=False;
+          break;
+        else:
+          LD = mdata[j][18:26];  
+          #print(LD)
+          #my.exit();                  
+          LD = my.trim(my.get_between(LD,"│","│"));
+          OUTPUT["主條目"]["土地坐落"]["小段"] += LD;          
+      break; 
+  OUTPUT["主條目"]["土地坐落"]["小段"]=my.trim(OUTPUT["主條目"]["土地坐落"]["小段"]);
+  #主條目-土地坐落-地號
+  OUTPUT["主條目"]["土地坐落"]["地號"]="";
+  check=True;
+  for i in range(1,len(mdata)):
+    if check == False:
+      break;
+    if my.is_string_like(mdata[i],"│號│縣　市│鄉鎮市區│"):      
+      for j in range((i+2),len(mdata)):        
+        #print(mdata[j]);
+        if my.is_string_like(mdata[j],"─"):
+          check=False;
+          break;
+        else:
+          LD = mdata[j][24:38];                              
+          LD = my.trim(my.get_between(LD,"│","│"));
+          #print(LD)
+          #my.exit();
+          OUTPUT["主條目"]["土地坐落"]["地號"] += LD;          
+      break; 
+  OUTPUT["主條目"]["土地坐落"]["地號"]=my.trim(OUTPUT["主條目"]["土地坐落"]["地號"]);
+    
+  #主條目-地目
+  OUTPUT["主條目"]["地目"]="";
+  check=True;
+  for i in range(1,len(mdata)):
+    if check == False:
+      break;
+    if my.is_string_like(mdata[i],"│號│縣　市│鄉鎮市區│"):      
+      for j in range((i+2),len(mdata)):        
+        #print(mdata[j]);
+        if my.is_string_like(mdata[j],"─"):
+          check=False;
+          break;
+        else:
+          LD = mdata[j][38:41];  
+          #print(LD)
+          #my.exit();                  
+          LD = my.trim(my.get_between(LD,"│","│"));
+          OUTPUT["主條目"]["地目"] += LD;          
+      break; 
+  OUTPUT["主條目"]["地目"]=my.trim(OUTPUT["主條目"]["地目"]);
+  #主條目-面積平方公尺
+  OUTPUT["主條目"]["面積平方公尺"]="";
+  check=True;
+  for i in range(1,len(mdata)):
+    if check == False:
+      break;
+    if my.is_string_like(mdata[i],"│號│縣　市│鄉鎮市區│"):      
+      for j in range((i+2),len(mdata)):        
+        #print(mdata[j]);
+        if my.is_string_like(mdata[j],"─"):
+          check=False;
+          break;
+        else:
+          LD = mdata[j][40:52];  
+          #print(LD)
+          #my.exit();                  
+          LD = my.trim(my.get_between(LD,"│","│"));
+          OUTPUT["主條目"]["面積平方公尺"] += LD;          
+      break; 
+  OUTPUT["主條目"]["面積平方公尺"]=my.trim(OUTPUT["主條目"]["面積平方公尺"]);  
+  #主條目-權利範圍
+  OUTPUT["主條目"]["權利範圍"]="";
+  check=True;
+  for i in range(1,len(mdata)):
+    if check == False:
+      break;
+    if my.is_string_like(mdata[i],"│號│縣　市│鄉鎮市區│"):      
+      for j in range((i+2),len(mdata)):        
+        #print(mdata[j]);
+        if my.is_string_like(mdata[j],"─"):
+          check=False;
+          break;
+        else:
+          LD = mdata[j][51:63];  
+          #print(LD)
+          #my.exit();                  
+          LD = my.trim(my.get_between(LD,"│","│"));
+          OUTPUT["主條目"]["權利範圍"] += LD;          
+      break; 
+  OUTPUT["主條目"]["權利範圍"]=my.trim(OUTPUT["主條目"]["權利範圍"]);   
+  #主條目-最低拍賣價格  
+  OUTPUT["主條目"]["最低拍賣價格"]="";
+  check=True;
+  for i in range(1,len(mdata)):
+    if check == False:
+      break;
+    if my.is_string_like(mdata[i],"│號│縣　市│鄉鎮市區│"):      
+      for j in range((i+2),len(mdata)):        
+        #print(mdata[j]);
+        if my.is_string_like(mdata[j],"─"):
+          check=False;
+          break;
+        else:
+          LD = mdata[j][62:79];  
+          #print(LD)
+          #my.exit();                  
+          LD = my.trim(my.get_between(LD,"│","│"));
+          OUTPUT["主條目"]["最低拍賣價格"] += LD;          
+      break; 
+  OUTPUT["主條目"]["最低拍賣價格"]=my.trim(OUTPUT["主條目"]["最低拍賣價格"]);   

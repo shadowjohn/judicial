@@ -1,3 +1,0 @@
-require
-requests
-BeautifulSoup4

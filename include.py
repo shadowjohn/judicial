@@ -144,7 +144,7 @@ class kit:
             import urllib2
             return urllib2.urlopen(data_path).read()
         else:
-            return open(data_path).read()
+            return open(data_path,encoding = 'utf8').read()
     def file_put_contents(self,filename,data,IS_APPEND=False):
         f = "";
         if IS_APPEND==True:
@@ -196,9 +196,15 @@ class kit:
     def json_encode(self,dict_data):
         import json
         return json.dumps(dict_data); #, ensure_ascii=False);
+    def json_encode_utf8(self,dict_data):
+        import json
+        return json.dumps(dict_data, ensure_ascii=False)
     def json_format(self,json_data):
         import json
         return json.dumps(self.json_decode(json_data),indent=4, sort_keys=True)
+    def json_format_utf8(self,json_data):
+        import json
+        return json.dumps(self.json_decode(json_data),indent=4, sort_keys=True, ensure_ascii=False)        
     def xml_decode(self,data):
         import xmltodict
         return xmltodict.parse(data)
@@ -353,7 +359,7 @@ class kit:
     def array_values(self,dictarr):
         return dictarr.values()
     def is_string_like(self,data,find_string):
-        if data.find(find_String) == -1:
+        if data.find(find_string) == -1:
           return False
         else:
           return True
@@ -449,3 +455,5 @@ class kit:
     def ceil(self,data):
         import math
         return math.ceil(data);
+    def is_numeric(self,data):
+        return data.isnumeric();

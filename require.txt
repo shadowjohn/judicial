@@ -1,0 +1,4 @@
+python -m pip install --upgrade pip
+require
+requests
+BeautifulSoup4

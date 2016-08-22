@@ -2,6 +2,7 @@
 import re
 import math
 from bs4 import BeautifulSoup
+# C52 = 房屋、一般程序
 class kit: 
   def get_gov_list(self,my): 
     data = my.file_get_contents_post("http://aomp.judicial.gov.tw/abbs/wkw/WHD2A00.jsp","");    
@@ -74,5 +75,38 @@ class kit:
       POSTS_STRING+="&area1=&area2=&r";    
       POSTS_STRING+="&pageNow="+str(i);
       page_data = my.file_get_contents_post(URL,POSTS_STRING);
-      my.file_put_contents("tmp\\"+str(i)+".htm",page_data);
+      spage_data = str(page_data, 'Big5',"ignore");
+      soup = BeautifulSoup(spage_data,'html.parser');
+      for link in soup.find_all("tr"):
+        slink = str(link);
+        if my.is_string_like(slink,"<a href=\"WHD2ASHOW.jsp?rowid="):
+          #slink = my.str_replace("\n","",slink);
+          #slink = my.str_replace(" ","",slink);
+          slink = my.trim(slink);
+          #print(slink+"\n");
+          slink_soup = BeautifulSoup(slink,'html.parser');
+          #筆次
+          ID = my.trim(slink_soup.div.get_text());
+          if my.is_numeric(ID) == False:
+            continue;
+          #藍地址
+          STRING = my.trim(slink_soup.a.get_text());
+          #連結 
+          LINK = "http://aomp.judicial.gov.tw/abbs/wkw/" + slink_soup.a.get("href");           
+          print( ID + " : " + STRING + " : " + LINK + "\n\n");
+          filename = ID+"_"+STRING+".txt";
+          
+          #已存在就跳過
+          if my.is_file("DOWNLOAD\\"+filename):
+            continue;
+          
+          #接下來是取得內頁的內容
+          URL = LINK;
+          contents = my.file_get_contents_post(URL,"");
+          scontents_data = str(contents, 'Big5',"ignore");
+          cut_spage_data = my.get_between(scontents_data,"~","~");
+          my.file_put_contents("DOWNLOAD\\"+filename,my.s2b(cut_spage_data));  
+      #my.exit();
+      #cut_spage_data = my.get_between(spage_data,"~","~");
+      #my.file_put_contents("tmp\\"+str(i)+".htm",my.s2b(cut_spage_data));  
     my.exit();
