@@ -1,0 +1,1878 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<!--
+    程式設計：林志賢                 更新日期：91.02.27	
+    修改	:wengchi 
+-->
+
+<html>
+<head>
+<title>法拍屋查詢系統</title>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+<link rel="stylesheet" href="../image/css.css" type="text/css">
+<script language="javascript" src="../script/WINDOW.js"></script>
+<script language="JavaScript">
+<!--
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function display(filenm){
+		var width = 700;
+		var height = 480;
+		//alert("display filenm: " + filenm);
+		openDialog(filenm,arguments,width,height,1);
+	}
+
+//進入水利網
+function gotoEPA(county,town,land1,land2,landno){
+	var param = 'county=' + county + '&town=' + town + '&land1='+ land1 +'&land2='+ land2 +'&landno='+landno;
+	//var epa =openwin1('http://sgw.epa.gov.tw/public/0401.asp',param,1024,768);
+	var epa =openwin1('http://sgw.epa.gov.tw/public/ContaminatedSitesMap/Default.aspx',param,1024,768);
+}
+
+//-->
+</script>
+</head>
+
+<body text="#000000" bgcolor="#FFFFFF" onLoad="MM_preloadImages('../image/02.gif')">
+<form name="form" method="post">
+<input type="hidden" name="pageTotal" value="11">
+<input type="hidden" name="pageSize" value="15">
+<input type="hidden" name="rowStart" value="91">
+<input type="hidden" name="saletypeX" value="1">
+<input type="hidden" name="proptypeX" value="C52">
+<input type="hidden" name="courtX" value="TPD">
+<input type="hidden" name="order" value="odcrm">
+<input type="hidden" name="query_typeX" value="session">
+<input type="hidden" name="saleno" value="">
+<input type="hidden" name="hsimun" value="all">
+<input type="hidden" name="ctmd" value="all">
+<input type="hidden" name="sec" value="all">
+<input type="hidden" name="crmyy" value="">
+<input type="hidden" name="crmid" value="">
+<input type="hidden" name="crmno" value="">
+<input type="hidden" name="dpt" value="">
+<input type="hidden" name="saledate1" value="">
+<input type="hidden" name="saledate2" value="">
+<input type="hidden" name="minprice1" value="">
+<input type="hidden" name="minprice2" value="">
+<input type="hidden" name="sumprice1" value="">
+<input type="hidden" name="sumprice2" value="">
+<input type="hidden" name="area1" value="">
+<input type="hidden" name="area2" value="">
+<input type="hidden" name="registeno" value="">
+<input type="hidden" name="checkyn" value="all">
+<input type="hidden" name="emptyyn" value="all">
+<input type="hidden" name="order" value="odcrm">
+<input type="hidden" name="owner1" value="">
+<input type="hidden" name="landkd" value="">
+<input type="hidden" name="rrange" value="不分">
+<input type="hidden" name="comm_yn" value="">
+  <table  border="0" align="center" cellspacing="0" cellpadding="0" width="98%">
+    <tr>
+      <td width="0%">&nbsp;</td>
+      <td width="98%"> 
+        <div align="center"></div>
+    </td>
+      <td width="2%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+  <tr>
+      <td width="0%">&nbsp;</td>
+      <td bgcolor="#FFFFFF" width="98%"><img alt="" src="../image/line.gif" width="1" height="1">
+
+      依案號排序
+
+      
+      </td>
+      <td width="2%">&nbsp;</td>
+  </tr>
+  <tr>
+      <td width="0%" bgcolor="#FFFFFF">&nbsp;</td>
+      <td width="98%"> 
+        <table width="100%" border="1" cellspacing="0"  cellpadding="0" >
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">筆次</div></td>
+            <td width="15%" class="head"> 
+              <div align="center">字號<br>
+                股別</div></td>
+            <td width="10%" class="head"> 
+              <div align="center">拍賣日期<br>
+              
+                 	拍賣次數
+              
+              
+               </div></td>
+            <td width="7%" class="head"> 
+              <div align="center">縣市</div></td>
+            <td width="20%" class="head"> 
+              <div align="center">
+                房屋地址/樓層面積
+
+                </div></td>
+				 
+                	<td  class="head">總拍賣底價(元)</td>
+                
+                
+                
+            
+		            <td width="6%" class="head"> 
+		              <div align="center">點交</div>
+		            </td>
+		            <td width="5%" class="head"> 
+		              <div align="center">空屋
+</div>
+		            </td>
+		            <td width="5%" class="head"> 
+		              <div align="center">標 別</div>
+		            </td>            
+		            <td width="7%" class="head"> 
+		              <div align="center">備 註</div>
+		            </td>
+		            	
+		            		<td  class="head"> 
+				              <div align="center">看圖</div>
+				            </td>
+		            	
+            
+             <td class="head"> 
+              <div align="center">採通訊投標</div>
+            </td>
+			 <td class="head"> 
+              <div align="center">土地有無<br>遭受污染</div>
+            </td>
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">91</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;188號<br>
+            
+              (火股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/22<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                中山區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10507%2F22142002619.039" target="_blank"> 
+              臺北市中山區松江路330巷53號4樓
+
+              </a>
+              
+               
+                  <br>
+                  6
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 1,940,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 21,150,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">不點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','000188','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','中山區','吉林','一','199')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">92</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;188號<br>
+            
+              (火股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/22<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                中山區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10507%2F22142002619.039" target="_blank"> 
+              臺北市中山區松江路330巷53號地下二層
+
+              </a>
+              
+               
+                  <br>
+                  43
+坪　x　10分之1
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 1,580,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 21,150,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">不點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','000188','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','中山區','吉林','一','199')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">93</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;1448號<br>
+            
+              (火股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/22<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                信義區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10507%2F05182017683.039" target="_blank"> 
+              臺北市信義區莊敬路202號4樓
+
+              </a>
+              
+               
+                  <br>
+                  25
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 2,030,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 22,100,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">部分點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','001448','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','信義區','三興','一','181')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">94</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;1448號<br>
+            
+              (火股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/22<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                信義區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10507%2F05182017683.039" target="_blank"> 
+              臺北市信義區莊敬路202號4樓頂層增建部分
+
+              </a>
+              
+               
+                  <br>
+                  24
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 1,070,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 22,100,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">部分點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','001448','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','信義區','三興','一','181')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">95</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;1451號<br>
+            
+              (甲股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/09/12<br>
+              
+
+                 第3拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">新北市<br>
+                新店區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10508%2F15151532024.018" target="_blank"> 
+              五�斥�63巷8弄98號
+
+              </a>
+              
+               
+                  <br>
+                  30
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 1,320,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 7,182,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">如備註或使用情形欄所示</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','001451','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('新北市','新店區','五峰','','344')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">96</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;2071號<br>
+            
+              (未股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/22<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                中山區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10507%2F20192402420.015" target="_blank"> 
+              中山北路二段93巷8號6樓之6
+
+              </a>
+              
+               
+                  <br>
+                  12
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 3,590,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 29,800,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">如備註或使用情形欄所示</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','002071','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','中山區','中山','三','143')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">97</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;4500號<br>
+            
+              (卯股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/22<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                松山區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10507%2F25171709134.035" target="_blank"> 
+              臺北市松山區南京東路五段１４５之１號七樓
+
+              </a>
+              
+               
+                  <br>
+                  28
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 5,582,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 55,110,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              		甲			
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','004500','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','松山區','西松','一','149-1')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">98</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;4500號<br>
+            
+              (卯股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/22<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                松山區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10507%2F25171709134.035" target="_blank"> 
+              臺北市松山區南京東路五段１４７巷１號七樓
+
+              </a>
+              
+               
+                  <br>
+                  24
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 4,972,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 55,110,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              		甲			
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','004500','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','松山區','西松','一','149-1')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">99</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;4500號<br>
+            
+              (卯股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/22<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                松山區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10507%2F25171709134.035" target="_blank"> 
+              臺北市松山區南京東路五段１４５之１號八樓
+
+              </a>
+              
+               
+                  <br>
+                  28
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 5,572,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 27,850,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              		乙			
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','004500','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','松山區','西松','一','149-1')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">100</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;4881號<br>
+            
+              (庚股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/25<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">新北市<br>
+                新店區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10508%2F08104155612.029" target="_blank"> 
+              光明街286巷19號五樓
+
+              </a>
+              
+               
+                  <br>
+                  32
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 2,500,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 12,000,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','004881','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('新北市','新店區','光明','','371    371-1')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">101</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;5195號<br>
+            
+              (癸股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/24<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                文山區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10507%2F26102945977.024" target="_blank"> 
+              台北市文山區忠順街42巷3弄7號3樓
+
+              </a>
+              
+               
+                  <br>
+                  25
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 1,000,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 13,800,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">如備註或使用情形欄所示</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','005195','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','文山區','實踐','一','319')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">102</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;5777號<br>
+            
+              (未股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/08/22<br>
+              
+
+                 第2拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">新北市<br>
+                新店區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10507%2F18101312215.015" target="_blank"> 
+              環河路30號22樓
+
+              </a>
+              
+               
+                  <br>
+                  57
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 12,640,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 39,041,600 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">如備註或使用情形欄所示</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','005777','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('新北市','新店區','環河','','407')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">103</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;8257號<br>
+            
+              (庚股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/09/22<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                松山區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10508%2F15152332191.029" target="_blank"> 
+              台北市松山區南京東路5段66巷22弄26號
+
+              </a>
+              
+               
+                  <br>
+                  10
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 7,500,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 28,000,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">不點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','008257','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','松山區','西松','二','650-1')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">104</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;&nbsp;&nbsp;8257號<br>
+            
+              (庚股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/09/22<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">臺北市<br>
+                松山區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10508%2F15152332191.029" target="_blank"> 
+              南京東路五段66巷22弄26號增建部分
+
+              </a>
+              
+               
+                  <br>
+                  5
+坪　x　全部
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 500,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 28,000,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">不點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','008257','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('臺北市','松山區','西松','二','650-1')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+          <tr>
+            <td width="5%" class="head"> 
+              <div align="center">105</div></td>
+            <td width="15%">105司執字第&nbsp;&nbsp;11025號<br>
+            
+              (德股)
+            
+            </td>
+            <td width="10%"> 
+              <div align="center">105/09/08<br>
+              
+
+                 第1拍
+              
+              
+
+              </div>
+            </td>
+            <td width="7%"> 
+              <div align="center">新北市<br>
+                新店區</div>
+            </td>
+
+
+            <td width="20%"> 
+              
+              <a href="WHD2ASHOW.jsp?rowid=%2Ftpd%2F10508%2F02174848139.042" target="_blank"> 
+              新北市新店區安和路三段120巷12號二樓
+
+              </a>
+              
+               
+                  <br>
+                  15
+坪　x　1分之1
+                  	
+              
+              
+              	 
+               		<BR>建物拍賣底價: 新台幣 260,000 元
+               	
+              
+             
+             
+            </td >
+			
+			<td> 4,100,000 </td>
+            
+            
+            <td width="6%"> 
+              <div align="center">不點交</div>
+            </td>
+            <td width="5%"> 
+              <div align="center">
+
+
+	      &nbsp;&nbsp;
+
+
+              </div>
+            </td>
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->
+            <td width="5%"> 
+              <div align="center">
+              	&nbsp;
+              					
+              </div>
+            </td>            
+
+            <!--         	//modified by Ender 08/08/25[ Bug #3306 - ULD0EC0970002 ]	 -->            
+            <td width="7%"> 
+              <div align="center">
+                &nbsp;
+	      </div>
+	    </td>
+	    	<td width='5%'><a href="javascript:donoting();" onclick="lookPic('105','司執','011025','TPD');" title='看拍賣物圖片'>看照片</a></td>   
+	   
+	        
+            
+            
+                          <td > 
+                          <center>
+            	否
+
+            </center>
+            </td>
+            
+            <td > 
+            	
+            	<a href="javascript:gotoEPA('新北市','新店區','新和','','244')">查詢</a>
+            	
+            </td>
+            
+
+            
+          </tr>
+          
+        </table>
+    </td>
+      <td width="2%" bgcolor="#FFFFFF"> </td>
+  </tr>
+  <tr>
+      <td width="0%">&nbsp;</td>
+      <td bgcolor="#FFFFFF" width="98%"><img alt="" src="../image/line.gif" width="1" height="1"></td>
+      <td width="2%">&nbsp;</td>
+  </tr>
+  <table width='95%' boder='0' align='center'>
+<tr><td>
+合計件數:&nbsp;155&nbsp;件&nbsp;&nbsp;
+</td></tr>
+<tr><td align='center'>
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=1;form.submit();'><font color='#0000FF' size='+1'><<第一頁</font>
+</nobr>&nbsp;&nbsp;
+<nobr><font size='+1'><<上10頁</font>
+</nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=6;form.submit();'><font color='#0000FF' size='+1'><上一頁</font>
+</nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=1;form.submit();'><font color='#0000FF' size='+1'>1
+</font></nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=2;form.submit();'><font color='#0000FF' size='+1'>2
+</font></nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=3;form.submit();'><font color='#0000FF' size='+1'>3
+</font></nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=4;form.submit();'><font color='#0000FF' size='+1'>4
+</font></nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=5;form.submit();'><font color='#0000FF' size='+1'>5
+</font></nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=6;form.submit();'><font color='#0000FF' size='+1'>6
+</font></nobr>&nbsp;&nbsp;
+<nobr><font size='+1'>[7]</font>
+</nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=8;form.submit();'><font color='#0000FF' size='+1'>8
+</font></nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=9;form.submit();'><font color='#0000FF' size='+1'>9
+</font></nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=10;form.submit();'><font color='#0000FF' size='+1'>10
+</font></nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=8;form.submit();'><font color='#0000FF' ' size='+1'>下一頁></font>
+</nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=11;form.submit();'><font color='#0000FF' ' size='+1'>下10頁>></font>
+</nobr>&nbsp;&nbsp;
+<nobr onmouseover="this.style.cursor='pointer'" onclick='form.pageNow.value=11;form.submit();'><font color='#0000FF' ' size='+1'>最後一頁>></font>
+</nobr>
+<input type='hidden' name='pageNow' value='7'>
+</td></tr>
+</table>
+
+</table>
+      
+<input type="hidden" name="5895C58FCBA07BFB795B873628D67BE6" value="6327D09D511F1F5E4A84C13E9275CBAC">
+</form>
+<p><br>
+
+<form name="form2" target="hiddenFrame" method="post" action="http://aomp1.judicial.gov.tw/KPIC/QUERYPIC.jsp">
+	<input type="hidden" name="CRMYY">
+	<input type="hidden" name="CRMID">
+	<input type="hidden" name="CRMNO">
+	<input type="hidden" name="GOV">
+	<input type="hidden" name="BUILDING" value="Y">
+</form>
+<iframe name="hiddenFrame" width="0" height="0">
+</iframe>
+<script language="javascript">
+	function donoting(){
+	}
+	function lookPic(crmyy,crmid,crmno,crtid){
+
+
+			form2.CRMYY.value=crmyy;
+			form2.CRMID.value=crmid;
+			form2.CRMNO.value=crmno;
+			form2.GOV.value=crtid;
+			//BUILDING=Y   是房屋
+			//BUILDING=M  是動產
+			form2.submit();
+
+
+	}
+</script>
+		<DIV align=center>
+			<CENTER>
+				<TABLE cellPadding=1 width="100%" border=0>
+					<TBODY>
+						<TR>
+							<TD>
+								<DIV align=center>
+									
+
+									
+								</DIV>
+							</TD>
+						</TR>
+					</TBODY>
+				</TABLE>
+				
+    <TABLE class=big cellSpacing=0 cellPadding=2 width=840 align=center border=0>
+      <TBODY> 
+      <TR> 
+        <TD vAlign=top width=44 height=20> <FONT size=2> 說明 : </FONT> </TD>
+        <TD vAlign=top width=12 height=20> <FONT size=2> 1. </FONT> </TD>
+        <TD vAlign=top width=584 height=20 align="left"> <FONT size=2> 本資料 <font color="red"> 
+          每日更新 </font> ，提供各地方法院待拍賣標的物之相關資訊。 </FONT> </TD>
+      </TR>
+      <TR> 
+        <TD vAlign=top height=20> <FONT size=2> &nbsp; </FONT> </TD>
+        <TD vAlign=top height=20> <FONT size=2> 2. </FONT> </TD>
+        <TD vAlign=top height=20 align="left"> <font size="2"> 拍定案件於拍定日後一個星期才會刊登。</font> </TD>
+      </TR>
+      <TR> 
+        <TD vAlign=top height=20> <FONT size=2> &nbsp; </FONT> </TD>
+        <TD vAlign=top height=20> <FONT size=2> 3. </FONT> </TD>
+        <TD vAlign=top height=20 align="left"> <font size="2"> 本網站拍定資料只保留三個月。</font> </TD>
+      </TR>
+      <TR> 
+        <TD vAlign=top width=44 height=20> <FONT size=2> &nbsp; </FONT> </TD>
+        <TD vAlign=top height=20> <FONT size=2> 4. </FONT> </TD>
+        <TD vAlign=top height=20 align="left"> <font size="2"> 本資料 <font color="red"> 
+          僅供參考 </font> ，如與拍賣公告不符， <font color="red"> 以公告為準 </font> 。 </font> </TD>
+      </TR>      <TR> 
+        <TD vAlign=top width=44 height=20> <FONT size=2> &nbsp; </FONT> </TD>
+        <TD vAlign=top height=20> <FONT size=2> 5. </FONT> </TD>
+        <TD vAlign=top height=20 align="left"> <font size="2"> 使用本系統前，請關閉IE瀏覽器及防毒軟體的「快顯封鎖程式」功能，或將*.judicial.gov.tw加入「允許快顯的網站清單」;若是使用IE 10瀏覽器，請將 judicial.gov.tw 加入相容性檢視設定。</font>
+        </TD>
+      </TR>
+      <TR> 
+        <TD vAlign=top width=44 height=20> <FONT size=2> &nbsp; </FONT> </TD>
+        <TD vAlign=top height=20> <FONT size=2> 6. </FONT> </TD>
+        <TD vAlign=top height=20 align="left"> <font size="2">本系統僅支援IE 8.0版本以上瀏覽器。</font> </TD>
+      </TR>
+      <TR> 
+        <TD vAlign=top width=44 height=20>&nbsp;</TD>
+        <TD vAlign=top height=20><font size="2"> 7. </font></TD>
+        <TD vAlign=top height=20 align="left"><FONT size=2>若您所看到的資料/表格無法對齊時，請將字型設定為&quot;<font color="#FF0000">細明體</font>，
+          字<font color="#FF0000"></font>型大小為&quot; 10 &quot;。</font></TD>
+      </TR>
+      <TR> 
+        <TD vAlign=top width=44 height=20>&nbsp;</TD>
+        <TD vAlign=top height=20><font size="2"> 8. </font></TD>
+        <TD vAlign=top height="20"  align="left"><font size=2>地方法院強制執行通訊投標書件標封格式，請至<a href="http://www.judicial.gov.tw/assist/assist03/assist03-04.asp" title="www.judicial.gov.tw網站">http://www.judicial.gov.tw/assist/assist03/assist03-04.asp</a>點選編號49。</font></TD>
+      </TR>
+      <TR> 
+        <TD vAlign=top width=44 height=20>&nbsp;</TD>
+        <TD vAlign=top height=20><font size="2"> 9. </font></TD>
+        <TD vAlign=top height="20"  align="left"><FONT size=2><font color="red">如字型出現空白</font>，請至<a href="http://www.judicial.gov.tw/" title="www.judicial.gov.tw網站">www.judicial.gov.tw網站之「下載中心」</a>，點選<a href="http://www.judicial.gov.tw/download/download01.asp#D01" title="「司法院造字檔」">「司法院造字檔」</a>，依說明安裝。</font></TD>
+      </TR>
+      <TR>
+        <TD vAlign=top width=44 height=20>&nbsp;</TD>
+        <TD vAlign=top height=20><font size=2> 10. </font></TD>
+        <TD vAlign=top height=20 align="left"><font size=2>拍賣標的物有無土壤或地下水污染之情事，請查詢行政院環保署「土壤及地下水污染整治網」(<a target="_blank" href="http://sgw.epa.gov.tw/public/index.asp" title="行政院環保署「土壤及地下水污染整治網」">http://sgw.epa.gov.tw/public/index.asp</a>)。</font></TD>
+      </TR>   
+      <TR>
+	<TD vAlign=top width=44 height=20>&nbsp;</TD>
+        <TD vAlign=top height=20><font size="2"> 11. </font></TD>
+        <TD vAlign=top height=20 align="left"><font size=2>若<font color="#FF0000">「執行拍賣法院」</font>選單只能點選到台灣台北地方法院，請將IE瀏覽器版本升級到8.0版以上。</font>
+      </TR>
+      <TR> 
+        <TD vAlign=top width=44 height=20>&nbsp;</TD>
+        <TD vAlign=top height=20><font size="2"> 12. </font></TD>
+        <TD vAlign=top height=20  align="left"><font size="2"><font color="#FF0000">應買公告</font>，詳參強制執行法第九十五條第一項之規定（經二次減價拍賣而未拍定之不動產，
+          債權人不願承受或依法不得承受時，執行法院應於第二次減價拍賣期日終結後十日內公告願
+          買受該不動產者，得於公告之日起三個月內依原定拍賣條件為應買之表示，執行法院得於詢
+          問債權人及債務人意見後，許其買受）。</font></TD>
+      </TR>
+         
+      <TR> 
+        <TD vAlign=top width=44 height=20> <FONT size=2> &nbsp; </FONT> </TD>
+        <TD vAlign=top height=20> 
+          <P>&nbsp; </P>
+        </TD>
+        <TD vAlign=top height=20> 
+          <P>&nbsp; </P>
+        </TD>
+      </TR>
+      <TR> 
+        <TD vAlign=top colspan="3" height="20" align="center"> <FONT size=2> 建議您使用800*600全彩及Internet Explorer 8.0版本以上瀏覽器&nbsp; </FONT> </TD>
+      </TR>
+      </TBODY> 
+    </TABLE>
+
+
+				<TABLE height=33 cellSpacing=0 cellPadding=0 width=760 align=center border=0>
+					<TBODY>
+						<TR>
+							<TD background="../image/welcome.gif">
+								<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+									<TBODY>
+										<TR>
+											<TD width="12%">&nbsp;
+												
+											</TD>
+											<TD width="75%">
+												<DIV align=center>
+													<FONT size=2>
+														<A href="http://www.judicial.gov.tw/" target=_parent>
+															司法院
+														</A>
+														資訊處 製作。 對於本系統功能有任何建議，
+														<A href="http://www.judicial.gov.tw/email/write.htm" target=_blank>
+															歡迎來信
+														</A>
+													</FONT>
+													。
+												</DIV>
+											</TD>
+											<TD width="13%">&nbsp;
+												
+											</TD>
+										</TR>
+									</TBODY>
+								</TABLE>
+							</TD>
+						</TR>
+					</TBODY>
+				</TABLE>
+
+			</CENTER>
+		</DIV>
+
+</body>
+</html>
+<script language="javascript">
+	function gmap(address){
+		openwin1('WHD2A06.jsp','address=' + address ,600,450);
+		//openDialog('test.jsp?address=' + address,'',600,500);
+	}
+	
+	function openwin1(URL,arguments,width,height)
+{ 
+   //功能:開一個非獨佔的視窗
+   //參數1.URL :連結的網頁
+   //參數2.arguments :傳入網頁的參數
+   var str = URL+"?"+arguments;
+   newWindow=window.open("","","maximize=no;toolbar=no,directories=no,status=yes,scrollbars=yes,hscrollbars=no,resize=no,menubar=no");
+   if(width==null&&height==null)
+   {
+     width=screen.width;
+     height=screen.availHeight;
+     
+   }	
+   if ((width!=null)&&(height!=null))
+      newWindow.resizeTo(width,height);
+   else     
+      newWindow.resizeTo(screen.width,screen.availHeight);
+   newWindow.moveTo((screen.width-width)/2,(screen.availHeight-height)/2);
+   newWindow.location=str;
+}
+</script>
+
+
